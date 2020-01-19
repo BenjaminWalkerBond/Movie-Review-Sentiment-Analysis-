@@ -1,0 +1,81 @@
+Reviewer: j_l127, reviewed code submitted by bwb63
+
+Section 1. General code quality and coding style. 
+Generally speaking the code quality of all the tests case is good. There is a use of predefined annotations before each function that
+defines the nature of each function and its responsibility, for example at the start the @Before and @After annotations tags
+are used to set up and clear the environment respectively. 
+
+Moreover, the coding style is also maintained throughout all the test cases. The naming conventions of the local variables is
+really good. Reasonable amount of comments are added before each test case that shows what each test case does.
+
+Section 2. Describe test cases that were correctly implemented, and reasoning.  
+Test 1: loadReviewsNotExistFilePath
+
+This test case has been correctly implemented. In this test case, the system tries to load a file that doesn't exists at the specified directory
+and as a result the expected result of this test case is Null Pointer Excetion that is also defined at the start of the function signature.
+
+Test 2: classifyReviewTest
+
+This test case has been correctly implemented. In this test case, the system first define 3 objects of MovieReview class and then try to classify one of the object
+out of those 3 and check if the classfication is as expected. The test case yields a true result.
+
+Test 3: deleteReviewTest
+
+This test case has been correctly implemented. In this test case, the system create an object of MovieReview and add that review in the database hashmap. The system
+then deletes that particular review from the database and checks if the length of the database is 0. This test yields the result as true.
+
+Test 4: deleteReviewWhenDatabaseEmpty
+
+This test case has been correctly implemented. In this test case, the system tries to delete a review from the empty database and that results in null result as expected.
+
+Test 5: readReviewPassedDirectoryPath
+
+This test case has been correctly implemented. In this test case, the function is expecting a file but the function is passed with a directory and as a result it yields IO
+exeption as expected.
+
+Test 6: readReviewNotExistFilePath
+
+This test case has been correctly implemented. In this test case, the readReview function is given a file path that doesn't even exists. As a result of this the expected 
+ouput of this test case is IOExpection. And the function yields the expected output.
+
+Test 7: saveSerialDBTest
+
+This test case has been correctly implemented. In this test case, the system create 3 objects of MovieReview and add all these objects in a hashmap and load
+loads all the serialized objects from the file database.ser. After that the function tests if all the MovieReview Objects are successfully saved as serialized objects. 
+The system checks if the hashmap contains the serialized objects with the specified Ids. 
+
+Test 8: loadSerialDBTest
+
+This test case has been correctly implemented. In this test case, the system create 3 objects of MovieReview and add all these objects in a hashmap and call the saveSerialDB function
+and it saves the database serialized objects to the file. After that the system checks if the loaded serialized objects contain any of the specified objects. If the loaded 
+hashmap contains the specified MovieReivew Object.
+
+Test 9: searchByIdTest
+
+This test case has been correctly implemented. In this test case, the system checks if the database contain any Moview Review with the specified id if the movie review
+exits then it shows not null otherwise the expected output of this test case is null.
+
+Test 10: searchBySubstringTest
+
+This test case has been correctly implemented. In this test case, the system create 3 objects of MovieReview and all those objects in the hashmap and search for a string in each
+review. If that particular string exists it returns the id of that review and if that review id is same as expected then the test case is true as in the present case.
+
+Test 11: searchBySubstringDuplicateTest
+
+This test case has been correctly implemented. In this test case, the system checks if a string is present in multiple movie reviews then the system should return a list of 
+all those reviews in this two MovieReviews are created and added to the hashmap with duplicate string. If the hashmap is search for that string it returns a list of both movie reviews as expected.    
+
+Section 3. Describe the test cases that were incorrectly implemented and add reasoning behind your description (e.g. does not run, trivial case, not reflecting the functionality ...). For each, give an example on how they should have been implemented.  
+Test 1: loadReviewsDirectoryTest:
+I think that this test case is not correctly implemented, in order to make the test cases run on all systems. The path the to the reviews directory must be relative.
+This test results in exception as the directory path specified doesn't exist.
+Test 2: loadReviewsFileTest
+I think that this test case is not correctly implemented, in order to make the test cases run on all systems. The path the to the reviews file must be relative.
+This test results in null exception as the file path specified doesn't exist.
+
+Section 4. Describe the test cases that are missing. What is missing and how many test cases, and how they should have been implemented, in plain English.  
+I think there are two test case that are missing.
+Test 1: readReviewThatExistFilePath:
+I think, there should be test case that read review of specific file path that exists in the system. And then check if the file has been successfully read with the expected result
+Test 2: searchByStringThatDoesntExist:
+I think there should be a test case that checks for a string that doesn't exist in all of the movie reviews and that returns null as expected result.

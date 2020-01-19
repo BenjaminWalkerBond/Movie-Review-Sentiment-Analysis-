@@ -1,0 +1,33 @@
+/**
+ * CS3354 Spring 2019 Design_Patterns used in assign6
+    @author bond
+ */
+ 
+Design Patterns in assign6:
+
+Composite Pattern:
+JPanel is a container that collects components topPanel and bottomPanel in our program. It is used in order to easily build the gui by placing component parts next to each other. The JPanel is initiated on Line (92) and components are added on Line (94,95).
+
+Command Pattern:
+ExecutorInterface is a command pattern, as implementing execute() is obeying a command. The ExecutorService object is created on Line (35) which implements the executor interface. A call to submit() on Line (74) utilizes the interface.
+
+Decorator Pattern:
+The outputArea (Line 73) is decorated with a JScrollPane(Line 74), making use of the decorator pattern. This is useful as any componenet, JList, or panel can be decorated with a JScrollPane. Both the decorator object and outputArea object implement the abstract class Component. Passing the outputArea object to JScrollPane, and reading the documentation, tells us that JScrollPane then manages the outputArea object. An example of this management can be seen on Line 639-643, where the scroll pane is passed a table, but createVerticalScrollBar() and createHorizontalScrollBar() modifies the look of the Jtable.
+
+Strategy Pattern:
+The use of a layout manager in our program means that we indirectly use a strategy pattern. GridLayout implements the LayoutManager Interface, and changes based on the context of the user input. A call to grid layout is on Line(216) of SentimentAnalysisApp.java.
+
+Model View Controller Pattern:
+ This pattern helps keep track of GUI interaction in the program. In this case, ReviewHandler.java acts as the Model, SentimentAnalysisApp.java contains action listeners which act as the controllers, and SentimentAnalysisApp.java contains GUI elements which update based on information passed to the controllers. An example selection of “4. Search movie reviews in database by substring.” during program execution is as follows: First, the view displays the option to change to command 4. When the user selects command 4, a call to itemStateChange(Line 137) causes the program to redraw the GUI based on the predefined view in SentimentAnalysisApp.java (controller). Then, the user enters a substring and presses submit. This is intercepted by an actionListener  (Line 489 in SentimentAnalysisApp.java) which handles the action(controller). A call to searchBySubstring() (Line 498) sends data from the controller to the model, and the model returns data based on the input. The GUI is then updated based on what the model returns. The GUI, although in SentimentAnalysisApp.java, acts as the view.
+
+
+
+
+Observer Pattern:
+The inclusions of buttons that have actionListeners that accept actionEvents means that this program indirectly utilizes an observer pattern. In this case, the subject is one of the many buttons, which is a source of events. The observer is the ActionListener, and the concrete observer is indirectly the GUI application. For instance, the confirmbutton adds an action listener on Line( 361) of SentimentAnalysisApp.java. It then passes the ActionEvent to its overridden actionPerformed() method, and changes the state of the observable object by appending “Illegal Input” to the output area Line ( 371) (assuming its illegal input).
+
+
+Template Pattern: Used with inclusion of AbstractReviewHandler.java and ReviewHandler.java.
+Description: AbstractReviewHandler.java defines close(Closeable)(Line 77), saveSerialDB()(Line 93), and classifyReview()(Line 56) and ReviewHandler.java utilizes close on Line(238) and classifyReview() on Line(182). This pattern was used because all review handler objects that are created need to classify reviews, save the reviews to a database, and close files within the handler class functions. This also allows for different handler classes, for example, YoutubeCommentReviewHandler to be added in the future that can still utilize file close operations and classify operations while possibly overriding the abstract functions in different ways.
+
+Likewise, ReviewHandler overrides the following functions in AbstractReviewHandler.java: (of the form: AbstractReviewHandler.java ... function ... ReviewHandler.java)  (32)loadReviews()(31), (43)readReview()(167), (68)deleteReview()(192), (123)loadSerialDB()(210), (132)searchById()(250), (140)searchBySubstring()(263), which further testifies to the fact that this is a Template Pattern, as these methods absolutely must be overridden since they are abstract.
